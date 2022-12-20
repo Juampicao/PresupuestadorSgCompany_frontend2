@@ -1,0 +1,74 @@
+{
+  "empresas": [
+    {
+      "id": 1,
+      "nombreEmpresa": "SG Company",
+      "direccionEmpresa": "Zapiola 2022",
+      "contactoEmpresa": "1122334455",
+      "observacionesParticulares": "observaciones de la empresa sg",
+      "aclaracionesGenerales": ""
+    },
+    {
+      "id": 2,
+      "nombreEmpresa": "Campito Futsal",
+      "direccionEmpresa": "nuñez 2629",
+      "contactoEmpresa": "112412421412",
+      "observacionesParticulares": "observaciones de la empresa el campito",
+      "aclaracionesGenerales": ""
+    },
+    {
+      "id": 3,
+      "nombreEmpresa": "Mesta SA",
+      "direccionEmpresa": "Cabildo 2620 6f",
+      "contactoEmpresa": "333124124124",
+      "observacionesParticulares": "observaciones de la empresa Mesta SA",
+      "aclaracionesGenerales": ""
+    }
+  ],
+  "clientes": [
+    {
+      "nombreCliente": "Burbon SA",
+      "contactoCliente": "333124124124",
+      "direccionCliente": "Ciudad de la paz 1202 3b",
+      "correoElectronico": "BurbonSA@gmail.com",
+      "pedidoCliente": "10 metros de travertino por 5x3cm",
+      "fechaUltimaModificacion": "2022-12-19T16:20:32.122Z",
+      "id": 101
+    },
+    {
+      "nombreCliente": "Herrajes SRL",
+      "contactoCliente": "111111111",
+      "direccionCliente": "Congreso 3002 5A",
+      "correoElectronico": "herrajesSRL@gmail",
+      "pedidoCliente": "50 metros de granito termolado ahre",
+      "fechaUltimaModificacion": "2022-12-16T22:05:52.787Z",
+      "id": 102
+    }
+  ],
+  "pedidos": [
+    {
+      "descripcionPedido": "50 metros de granito termolado ahre",
+      "nombreCliente": "Burbon SA",
+      "fecha": "2022-12-16",
+      "id": 2032
+    },
+    {
+      "descripcionPedido": "10 metros de travertino por 5x3cm",
+      "nombreCliente": "102",
+      "fecha": "2022-12-20T02:21:15.082Z",
+      "id": 2033
+    },
+    {
+      "descripcionPedido": "Nuevo pedido para presuestar",
+      "nombreCliente": "102",
+      "fecha": "2022-12-20T02:44:39.454Z",
+      "id": 2034
+    },
+    {
+      "descripcionPedido": "pedido de burbon",
+      "nombreCliente": "101",
+      "fecha": "2022-12-20T02:50:52.400Z",
+      "id": 2035
+    }
+  ]
+}
