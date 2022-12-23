@@ -3,13 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { BotonEditar, BotonEliminar, BotonVer } from "../../atoms/Botones";
 import Modal from "../../atoms/Modal";
 import CustomLogger from "../../helpers/CustomLogger";
+import { estadoPedidosObject } from "../../helpers/estadoPedidos";
 import useModal from "../../hooks/useModal";
 import FormularioPedido from "./FormularioPedido";
 
 let customLogger = new CustomLogger();
 
 const Pedido = ({ pedido, deleteFn, loading, createFn, editFn }) => {
-  const { id, descripcionPedido, nombreCliente, fecha } = pedido;
+  const {
+    id,
+    descripcionPedido,
+    nombreCliente,
+    fecha,
+    estado,
+    nombrePedido,
+    numeroCotizacion,
+  } = pedido;
 
   const [isOpenEditForm, openEditForm, closeEditForm] = useModal(false);
 
@@ -19,7 +28,7 @@ const Pedido = ({ pedido, deleteFn, loading, createFn, editFn }) => {
   function handleDelete(id) {
     customLogger.logDebug("[Pedido.jsx] = handleDelete() => id:" + id);
     let confirmar = confirm(
-      `¿Seguro deseas eliminar a\n${pedido.descripcionPedido}?`
+      `¿Seguro deseas eliminar a\n${pedido.nombrePedido}?`
     );
     if (confirmar) {
       deleteFn(id);
@@ -31,11 +40,25 @@ const Pedido = ({ pedido, deleteFn, loading, createFn, editFn }) => {
 
   return (
     <>
-      <tr className="hover:bg-gray-200 border">
+      <tr
+        className={`${estadoPedidosObject[estado].color} border border-1 border-slate-400`}
+      >
+        <td className="">
+          <img
+            src={estadoPedidosObject[estado].img}
+            alt=""
+            className="img-icon mx-auto"
+          />
+        </td>
         <td>{id}</td>
-        <td>{descripcionPedido}</td>
+        <td>
+          {nombrePedido
+            ? nombrePedido
+            : pedido.variables.numeroPresupuesto + " " + nombrePedido}
+        </td>
+        <td className="text-center"> {numeroCotizacion}</td>
         <td>{nombreCliente}</td>
-        <td>{fecha.split("T")[0]}</td>
+        <td>{fecha ? fecha.split("T")[0] : fecha}</td>
 
         <td className=" ">
           <div className=" ">

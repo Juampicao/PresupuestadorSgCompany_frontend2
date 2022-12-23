@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from "react";
 import CustomLogger from "../../helpers/CustomLogger";
-import useDataBase from "../../hooks/useDataBase";
+import useClientes from "../../hooks/useClientes";
 import useGeneral from "../../hooks/useGeneral";
+
 let customLogger = new CustomLogger();
 
-const ClienteFormulario = () => {
+const ClienteFormulario = ({ objetoCliente = "" }) => {
   const { getClientByIdFn, getAllClientesFn, cliente, clientes } =
-    useDataBase();
+    useClientes();
 
   const { setCliente } = useGeneral(); //Todo hay dos cliente (en dataBase y useGeneral)..
 
   const [nombreCliente, setNombreCliente] = useState("");
   const [contactoCliente, setContactoCliente] = useState("");
   const [direccionCliente, setDireccionCliente] = useState("");
-  const [clienteLocal, setClienteLocal] = useState({});
+  const [nombrePedido, setNombrePedido] = useState("");
+  const [descripcionPedido, setDescripcionPedido] = useState("");
 
   let ObjetoCliente = {
     nombreCliente,
     contactoCliente,
     direccionCliente,
+    nombrePedido,
+    descripcionPedido,
   };
 
   /**
@@ -30,6 +34,8 @@ const ClienteFormulario = () => {
       setNombreCliente(cliente.nombreCliente);
       setContactoCliente(cliente.contactoCliente);
       setDireccionCliente(cliente.direccionCliente);
+      setNombrePedido(cliente.nombrePedido);
+      setDescripcionPedido(cliente.descripcionPedido);
     }
   }
 
@@ -42,14 +48,21 @@ const ClienteFormulario = () => {
     setCliente({
       ...ObjetoCliente,
     });
-  }, [nombreCliente, contactoCliente, direccionCliente]);
-
-  useEffect(() => {
-    completeFields(clienteLocal);
-  }, [clienteLocal]);
+  }, [
+    nombreCliente,
+    contactoCliente,
+    direccionCliente,
+    nombrePedido,
+    descripcionPedido,
+  ]);
 
   useEffect(() => {
     getAllClientesFn();
+  }, []);
+
+  useEffect(() => {
+    completeFields(objetoCliente);
+    customLogger.logDebug("[ClienteFormulario], objetoCliente:", objetoCliente);
   }, []);
 
   return (
@@ -65,6 +78,8 @@ const ClienteFormulario = () => {
             <select
               name=""
               id=""
+              className="selectstyles"
+              value={(e) => e.target.value}
               onChange={(e) => onSelectChange(e.target.value)}
             >
               {clientes.map((cliente) => (
@@ -110,6 +125,29 @@ const ClienteFormulario = () => {
             name="direccionCliente"
             value={direccionCliente}
             onChange={(e) => setDireccionCliente(e.target.value)}
+          />
+        </div>
+        <div className="form_container_child">
+          <label> Nombre Pedido</label>
+          <input
+            autoComplete="off"
+            type="text"
+            placeholder="Nombre del pedido.."
+            name="nombrePedido"
+            value={nombrePedido}
+            onChange={(e) => setNombrePedido(e.target.value)}
+          />
+        </div>
+        <div className="form_container_child">
+          <label> Descripcion del Pedido</label>
+          <input
+            autoComplete="off"
+            type="textarea"
+            className="mt-2 w-full p-3 bg-gray-50 py-10 mx-auto text-start "
+            // placeholder="Descripcion del pedido.."
+            name="descripcionPedido"
+            value={descripcionPedido}
+            onChange={(e) => setDescripcionPedido(e.target.value)}
           />
         </div>
         {/* <button onClick={handleSubmit}> Enviar</button> */}

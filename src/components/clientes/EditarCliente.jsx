@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import Header from "../../atoms/Header";
-import useDataBase from "../../hooks/useDataBase";
+import useClientes from "../../hooks/useClientes";
 import FormularioCliente from "./formulario/FormularioCliente";
 
 const EditarCliente = () => {
-  const { handleSubmitNewClient, getClientById, cliente } = useDataBase();
+  const { handleSubmitNewClient, getClientById, cliente } = useClientes();
 
   useEffect(() => {
     getClientById(101);

@@ -26,11 +26,13 @@ const ListadoPedidos = () => {
         {/* {JSON.stringify(clientes, null, 2)} Debug error */}
         {loading ? <Spiner /> : ""}
         <div className="overflow-auto rounded-xl  shadow-xl  my-5 text-center max-w-7xl  ">
-          <table className="w-full">
+          <table className="w-full ">
             <thead className=" bg-white border-b-2 border-gray-200">
               <tr className="  bg-white">
+                <th className="p-2"> Estado</th>
                 <th className="p-2"> Id</th>
-                <th className="p-2 ">Pedido</th>
+                <th className="p-2 ">Nombre Pedido</th>
+                <th className="p-2 ">Numero Cotizacion</th>
                 <th className="p-2 ">Cliente</th>
                 <th className="p-2 ">Fecha</th>
 

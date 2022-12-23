@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import Header from "../../atoms/Header";
 import Spiner from "../../atoms/spiner/Spiner";
 import CustomLogger from "../../helpers/CustomLogger";
-import useDataBase from "../../hooks/useDataBase";
+import useClientes from "../../hooks/useClientes";
 import Cliente from "./Cliente";
 
 let customLogger = new CustomLogger();
 
 const ListadoClientes = () => {
-  const { getAllClientesFn, clientes, loading } = useDataBase();
+  const { getAllClientesFn, clientes, loading } = useClientes();
 
   useEffect(() => {
     getAllClientesFn();

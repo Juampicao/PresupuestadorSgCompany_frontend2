@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import FormContainerChild from "../../../atoms/FormContainerChild";
 import CustomLogger from "../../../helpers/CustomLogger";
-import useDataBase from "../../../hooks/useDataBase";
+import useClientes from "../../../hooks/useClientes";
 import useGeneral from "../../../hooks/useGeneral";
+
+// IMAGENES
+import clienteImage from "../../../img/newIcons/cliente.png";
+import pedidoImage from "../../../img/newIcons/construccion.png";
+import emailImage from "../../../img/newIcons/email.png";
+import homeImage from "../../../img/newIcons/home.png";
+import phoneImage from "../../../img/newIcons/phone.png";
+
 let customLogger = new CustomLogger();
 
 const FormularioCliente = ({ cliente }) => {
-  const { createNewClientFn, editClientFn } = useDataBase();
+  const { createNewClientFn, editClientFn } = useClientes();
   const { isCargando } = useGeneral();
 
   let navigate = useNavigate();
@@ -75,8 +84,9 @@ const FormularioCliente = ({ cliente }) => {
               {cliente?.id ? "Editar Cliente" : "Crear Cliente"}
             </h3>
             <div className="form_container_child">
-              <label htmlFor=""> Nombre</label>
+              <FormContainerChild img={clienteImage} title={"nombre"} />
               <input
+                autoComplete="off"
                 type="text"
                 placeholder="Nombre cliente.."
                 name="nombreCliente"
@@ -85,8 +95,10 @@ const FormularioCliente = ({ cliente }) => {
               />
             </div>
             <div className="form_container_child">
-              <label> Contacto</label>
+              <FormContainerChild img={phoneImage} title={"contacto"} />
+
               <input
+                autoComplete="off"
                 type="text"
                 placeholder="Contacto cliente.."
                 name="contactoCliente"
@@ -95,8 +107,10 @@ const FormularioCliente = ({ cliente }) => {
               />
             </div>
             <div className="form_container_child">
-              <label> Direccion</label>
+              <FormContainerChild img={homeImage} title={"direccion"} />
+
               <input
+                autoComplete="off"
                 type="text"
                 placeholder="Direccion cliente.."
                 name="direccionCliente"
@@ -105,8 +119,13 @@ const FormularioCliente = ({ cliente }) => {
               />
             </div>
             <div className="form_container_child">
-              <label> Correo Electronico</label>
+              <FormContainerChild
+                img={emailImage}
+                title={"correo electronico"}
+              />
+
               <input
+                autoComplete="off"
                 type="text"
                 placeholder="correo electronico cliente.."
                 name="correoElectronico"
@@ -115,8 +134,12 @@ const FormularioCliente = ({ cliente }) => {
               />
             </div>
             <div className="form_container_child">
-              <label> Pedido a cotizar</label>
+              <FormContainerChild
+                img={pedidoImage}
+                title={"pedido a cotizar"}
+              />
               <textarea
+                autoComplete="off"
                 type="textarea"
                 placeholder="Notas del cliente.."
                 className="mt-2 block w-full p-3 bg-gray-50 h-40"
@@ -126,11 +149,7 @@ const FormularioCliente = ({ cliente }) => {
               ></textarea>
             </div>
           </form>
-          <button
-            className="botonSubmit mx-auto"
-            // type="button"
-            onClick={handleSubmit}
-          >
+          <button className="botonSubmit mx-auto" onClick={handleSubmit}>
             {cliente?.id ? "Guardar Cliente" : "Crear Cliente"}
             {isCargando ? (
               <span className="pl-3">

@@ -1,13 +1,13 @@
 import axios from "axios";
 import React, { createContext, useState } from "react";
+import ErrorPedidos from "../errores/ErrorPedidos";
 import CustomLogger from "../helpers/CustomLogger";
 const PedidosContext = createContext();
 
 let customLogger = new CustomLogger();
 
 const PedidosProvider = ({ children }) => {
-  const url = `http://localhost:4000/pedidos`;
-  // `${import.meta.env.DATABASE__URL}
+  const url = `${import.meta.env.VITE_DATABASE_URL}/pedidos`;
 
   const [loading, setLoading] = useState(false);
   const [pedidos, setPedidos] = useState([]);
@@ -24,7 +24,10 @@ const PedidosProvider = ({ children }) => {
     axios
       .post(`${url}`, pedido)
       .then((result) => customLogger.logInfo(`Creado con exito:`, result))
-      .catch((error) => customLogger.logError("Hubo un error:", error));
+      .catch((error) => {
+        customLogger.logError("[createNewPedidoFn]", error);
+        throw new ErrorPedidos("[createNewPedidoFn]", error);
+      });
   }
 
   // Editar Pedido
@@ -33,7 +36,11 @@ const PedidosProvider = ({ children }) => {
     axios
       .put(`${url}/${pedido.id}`, pedido)
       .then((result) => customLogger.logDebug("Creado con éxito:", result))
-      .catch((error) => customLogger.logError("Hubo un error:", error));
+      .then(() => window.location.reload())
+      .catch((error) => {
+        customLogger.logError("[editClientFn]", error);
+        throw new ErrorPedidos("[editClientFn]", error);
+      });
   }
 
   /**
@@ -53,9 +60,10 @@ const PedidosProvider = ({ children }) => {
         setPedidos(res.data);
         setLoading(false);
       })
-      .catch((err) => {
-        customLogger.logError("Hubo un error", err);
+      .catch((error) => {
+        customLogger.logError("[getAllPedidosFn]", error);
         setLoading(false);
+        throw new ErrorPedidos("[getAllPedidosFn]", error);
       });
   }
 
@@ -74,9 +82,10 @@ const PedidosProvider = ({ children }) => {
         setPedido(res.data);
         setLoading(false);
       })
-      .catch((err) => {
-        customLogger.logError(err);
+      .catch((error) => {
+        customLogger.logError("[getPedidoByIdFn]", error);
         setLoading(false);
+        throw new ErrorPedidos("[getPedidoByIdFn]", error);
       });
   }
 
@@ -94,9 +103,11 @@ const PedidosProvider = ({ children }) => {
         );
         setLoading(false);
       })
-      .catch((err) => {
-        customLogger.logError("Hubo un error", err);
+      .then(() => window.location.reload())
+      .catch((error) => {
+        customLogger.logError("[deletePedidoFn]", error);
         setLoading(false);
+        throw new ErrorPedidos("[deletePedidoFn]", error);
       });
   }
 

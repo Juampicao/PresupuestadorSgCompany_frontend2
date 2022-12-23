@@ -5,7 +5,7 @@ import Header from "../../atoms/Header";
 import Spiner from "../../atoms/spiner/Spiner";
 import WatchContainer from "../../atoms/WatchContainer";
 import CustomLogger from "../../helpers/CustomLogger.js";
-import useDataBase from "../../hooks/useDataBase";
+import useClientes from "../../hooks/useClientes";
 
 // IMAGENES
 import clienteImage from "../../img/newIcons/cliente.png";
@@ -19,7 +19,7 @@ import phoneImage from "../../img/newIcons/phone.png";
 let customLogger = new CustomLogger();
 
 const VerCliente = () => {
-  const { getClientByIdFn, cliente } = useDataBase();
+  const { getClientByIdFn, cliente } = useClientes();
 
   const params = useParams();
   const navigate = useNavigate();
@@ -98,7 +98,11 @@ const VerCliente = () => {
               alt={"fecha image"}
               title={"Fecha"}
               titleStyles={titleStyles}
-              paragraph={fechaUltimaModificacion.split("T")[0]}
+              paragraph={
+                fechaUltimaModificacion
+                  ? fechaUltimaModificacion.split("T")[0]
+                  : fechaUltimaModificacion
+              }
             />
 
             {/* Direccion */}

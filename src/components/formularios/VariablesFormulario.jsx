@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
+import CustomLogger from "../../helpers/CustomLogger";
+import { numeroCotizacionPersonalizado } from "../../helpers/numeroCotizacionPersonalizado";
+import { tiposDescuentos } from "../../helpers/variables";
 import useGeneral from "../../hooks/useGeneral";
 
-const VariablesFormulario = () => {
+const customLogger = new CustomLogger();
+
+const VariablesFormulario = ({ objetoVariables }) => {
   const { setVariables } = useGeneral("");
 
   const [validezPresupuesto, setValidezPresupuesto] = useState(7);
@@ -9,58 +14,97 @@ const VariablesFormulario = () => {
   const [fechaPresupuesto, setFechaPresupuesto] = useState(
     new Date().toISOString().split("T")[0]
   );
+  const [descuentoTotal, setDescuentoTotal] = useState("");
+  const [tipoDescuento, setTipoDescuento] = useState("");
+
+  const [nuevaValidezPresupuesto, setNuevaValidezPresupuesto] = useState("");
 
   let ObjetoVariables = {
+    validezPresupuesto,
     numeroPresupuesto,
     fechaPresupuesto,
-    validezPresupuesto,
+    descuentoTotal,
+    tipoDescuento,
   };
+
+  /**
+   * Completar los estados locales con un objeto cliente.
+   * @param {object} cliente
+   */
+  function completeFields(variables) {
+    if (variables) {
+      setValidezPresupuesto(variables.validezPresupuesto);
+      setNumeroPresupuesto(variables.numeroCotizacion);
+      setFechaPresupuesto(variables.fechaPresupuesto);
+      setDescuentoTotal(variables.descuentoTotal);
+      setTipoDescuento(variables.tipoDescuento);
+    }
+  }
 
   useEffect(() => {
     setVariables({
       ...ObjetoVariables,
     });
-  }, [numeroPresupuesto, fechaPresupuesto, validezPresupuesto]);
+  }, [
+    numeroPresupuesto,
+    fechaPresupuesto,
+    validezPresupuesto,
+    descuentoTotal,
+    tipoDescuento,
+  ]);
 
-  /**
-   * Completa el numero de la cotizacion segun quien la este realizando. (santi o el jefe).
-   * @param {*} creadorCotizacion
-   */
-  function numeroPresupuestoPersonalizado(creadorCotizacion) {
-    console.log("Desde numeroCotizacionPersonalizadoo", creadorCotizacion);
+  useEffect(() => {
+    completeFields(objetoVariables);
+    customLogger.logDebug(
+      "[VariablesFormulario], objetoVariables",
+      objetoVariables
+    );
+  }, []);
 
-    if (creadorCotizacion === "santiago") {
-      setNumeroPresupuesto("100-5070B-SAN");
-    } else if (creadorCotizacion === "karina") {
-      setNumeroPresupuesto("200-20K0B-KAR");
-    } else if (creadorCotizacion === "tomas") {
-      setNumeroPresupuesto("300-39IOD-TOM");
-    }
-  }
-
+  const opcionesNumeros = [
+    { numero: 7, value: 7 },
+    { numero: 15, value: 15 },
+    { numero: 21, value: 21 },
+    { numero: 30, value: 30 },
+    { numero: "otro", value: "otro" },
+  ];
   return (
     <>
       <div className="flex items-center flex-wrap sm:justify-evenly gap-y-3 mt-5">
-        <div className="">
-          <label>Validez del Presupuesto</label>
-
-          <select
-            name="validezPrespuesto"
-            className="inputSelect"
-            value={validezPresupuesto}
-            onChange={(e) => setValidezPresupuesto(e.target.value)}
-          >
-            <option value="5"> 5 </option>
-            <option value="7" defaultValue>
-              7
-            </option>
-            <option value="10">10</option>
-            <option value="15"> 15 </option>
-            <option value="30"> 30 </option>
-          </select>
-          <label htmlFor="">Dias</label>
-        </div>
+        {validezPresupuesto !== "otro" ? (
+          <div className="">
+            <label>Validez del Presupuesto</label>
+            <select
+              name="validezPrespuesto"
+              className="inputSelect"
+              value={validezPresupuesto}
+              onChange={(e) => {
+                setValidezPresupuesto(e.target.value);
+              }}
+            >
+              {opcionesNumeros.map((option) => (
+                <option value={option.value}>{option.numero}</option>
+              ))}
+            </select>
+            <label htmlFor="">Dias</label>
+          </div>
+        ) : (
+          <div className="form_container_child">
+            <label htmlFor=""> Dias Validez Presupuesto </label>
+            <input
+              type="number"
+              className="inputSelect"
+              name="nuevaValidezPresupuesto"
+              value={nuevaValidezPresupuesto}
+              onChange={(e) => {
+                setNuevaValidezPresupuesto(e.target.value),
+                  setValidezPresupuesto("otro");
+              }}
+            />
+          </div>
+        )}
       </div>
+
       <div className="form_container">
         <h3 className="titulos">Datos Cotizacion </h3>
 
@@ -70,12 +114,15 @@ const VariablesFormulario = () => {
           <select
             name=""
             id=""
-            onChange={(e) => numeroPresupuestoPersonalizado(e.target.value)}
+            onChange={(e) => setNumeroPresupuesto(e.target.value)}
           >
             <option value="">--Select--</option>
-            <option value="santiago">Santago</option>
-            <option value="karina">Karina</option>
-            <option value="tomas">Tomas</option>
+
+            {numeroCotizacionPersonalizado.map((e) => (
+              <option value={e.abreviatura + "-" + e.ultimoNumeroCotizacion}>
+                {e.nombre}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -100,6 +147,37 @@ const VariablesFormulario = () => {
             value={numeroPresupuesto}
             onChange={(e) => setNumeroPresupuesto(e.target.value)}
           />
+        </div>
+        {/* Tipo descuento */}
+        <div>
+          <label htmlFor=""> Tipo de descuento</label>
+          <select
+            type="text"
+            placeholder="tipo de descuento.."
+            name="tipoDescuento"
+            className="selectstyles"
+            value={tipoDescuento}
+            onChange={(e) => setTipoDescuento(e.target.value)}
+          >
+            <option value="">--select--</option>
+            {tiposDescuentos.map((descuento) => (
+              <option value={descuento.nombre}> {descuento.nombre}</option>
+            ))}
+          </select>
+        </div>
+
+        {/* Descuento Total */}
+        <div className="form_container_child flex">
+          <div>
+            <label htmlFor=""> % Descuento Total</label>
+            <input
+              type="number"
+              placeholder="descuento sobre el total.."
+              name="descuentoTotal"
+              value={descuentoTotal}
+              onChange={(e) => setDescuentoTotal(e.target.value)}
+            />
+          </div>
         </div>
       </div>
     </>

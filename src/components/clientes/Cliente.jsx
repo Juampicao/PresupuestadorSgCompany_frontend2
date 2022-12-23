@@ -3,14 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { BotonEditar, BotonEliminar, BotonVer } from "../../atoms/Botones";
 import Modal from "../../atoms/Modal";
 import CustomLogger from "../../helpers/CustomLogger";
-import useDataBase from "../../hooks/useDataBase";
+import useClientes from "../../hooks/useClientes";
 import useModal from "../../hooks/useModal.js";
 import FormularioCliente from "./formulario/FormularioCliente";
 
 let customLogger = new CustomLogger();
 
 const Cliente = ({ cliente }) => {
-  const { deleteClientFn } = useDataBase();
+  const { deleteClientFn } = useClientes();
 
   const [isOpenEditForm, openEditForm, closeEditForm] = useModal(false);
 

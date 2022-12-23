@@ -1,11 +1,14 @@
 import axios from "axios";
 import React, { createContext, useState } from "react";
 import CustomLogger from "../helpers/CustomLogger";
-const DataBaseContext = createContext();
+const ClientesContext = createContext();
 
 let customLogger = new CustomLogger();
 
-const DataBaseProviver = ({ children }) => {
+// DataBaseProviver por ClientesProvider
+// DataBaseContext por ClientesContext
+
+const ClientesProvider = ({ children }) => {
   const url = `http://localhost:4000/`;
   // `${import.meta.env.DATABASE__URL}
 
@@ -41,7 +44,7 @@ const DataBaseProviver = ({ children }) => {
     axios
       .put(`http://localhost:4000/clientes/${cliente.id}`, cliente)
       .then((result) => customLogger.logDebug("Creado con éxito:", result))
-
+      .then(() => window.location.reload())
       .catch((error) => customLogger.logError("Hubo un error:", error));
   }
 
@@ -101,8 +104,9 @@ const DataBaseProviver = ({ children }) => {
         customLogger.logDebug(
           `[deleteClientFn():]. Cliente borrado con exito:${id}`
         );
-        setLoading(false);
       })
+      .then(() => window.location.reload())
+      .then(() => setLoading(false))
       .catch((err) => {
         customLogger.logError("Hubo un error", err);
         setLoading(false);
@@ -128,7 +132,7 @@ const DataBaseProviver = ({ children }) => {
   }
 
   return (
-    <DataBaseContext.Provider
+    <ClientesContext.Provider
       value={{
         loading,
         setLoading,
@@ -147,10 +151,10 @@ const DataBaseProviver = ({ children }) => {
       }}
     >
       {children}
-    </DataBaseContext.Provider>
+    </ClientesContext.Provider>
   );
 };
 
-export { DataBaseProviver };
+export { ClientesProvider };
 
-export default DataBaseContext;
+export default ClientesContext;

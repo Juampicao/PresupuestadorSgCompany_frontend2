@@ -1,0 +1,130 @@
+{
+  "pedidos": [
+    {
+      "descripcionPedido": "50 metros de granito termolado ahre",
+      "nombrePedido": "Alicia Cocina",
+      "nombreCliente": "Burbon SA",
+      "fecha": "2022-12-16",
+      "estado": "terminado",
+      "numeroCotizacion": "SA-3333-alicia cocina",
+      "id": 2032,
+      "variables": {
+        "validezPresupuesto": "7",
+        "numeroCotizacion": "SG-1111",
+        "fechaPresupuesto": "2022-10-10",
+        "descuentoTotal": 10,
+        "tipoDescuento": "profesional"
+      },
+      "cliente": {
+        "nombreCliente": "osvaldo",
+        "contactoCliente": "111111",
+        "direccionCliente": "la casa de osvaldo",
+        "nombrePedido": "Osvalod",
+        "descripcionPedido": "la descripciooon es essta"
+      },
+      "empresa": {
+        "nombreEmpresa": "SG company",
+        "direccionEmpresa": "zapiola 1212",
+        "contactoEmpresa": "29492492",
+        "observacionesParticulares": "observaciones en particular de SG",
+        "aclaracionesGenerales": "plazo segun estipulado"
+      },
+      "productosList": [
+        {
+          "cantidad": "Madera",
+          "costoUnitario": "",
+          "descripcion": "",
+          "nombreMaterial": "",
+          "coeficienteVenta": 1.5
+        }
+      ]
+    },
+    {
+      "descripcionPedido": "3x5 del granito",
+      "nombrePedido": "Osvaldo NO ANDA",
+      "nombreCliente": "Burbon SA",
+      "fecha": "2022-12-21T13:07:29.703Z",
+      "estado": "terminado",
+      "numeroCotizacion": "SA-3334-Osvaldo Granito",
+      "id": 2038
+    },
+    {
+      "descripcionPedido": "50 metros de granito termolado ahre",
+      "nombrePedido": "ESTE FUNCIONA",
+      "nombreCliente": "Burbon SA",
+      "fecha": "2022-12-16",
+      "estado": "terminado",
+      "numeroCotizacion": "SA-3333-alicia cocina",
+      "id": 2033,
+      "cliente": {
+        "nombreCliente": "Herrajes SRL",
+        "contactoCliente": "222222",
+        "direccionCliente": "Congreso 3002 5A"
+      },
+      "empresa": {
+        "nombreEmpresa": "SG Company",
+        "direccionEmpresa": "Zapiola 2022",
+        "contactoEmpresa": "1122334455",
+        "observacionesParticulares": "Formas y condiciones de contratación: Precios indicados no incluyen IVA .Valores expresados en dólares EE.UU. Tipo  de cambio : vendedor -Bco Nación. Forma de pago:70% acopio y saldo contra entrega.",
+        "aclaracionesGenerales": "Plazo de entrega : hasta 25 días  desde el replanteo."
+      },
+      "productosList": [
+        {
+          "cantidad": 10,
+          "costoUnitario": 5,
+          "descripcion": "maderas por doquier",
+          "nombreMaterial": "madera",
+          "coeficienteVenta": 1.5
+        },
+        {
+          "cantidad": 30,
+          "costoUnitario": 30,
+          "descripcion": "quarzo por doquier",
+          "nombreMaterial": "quarzo",
+          "coeficienteVenta": 1.5
+        }
+      ],
+      "variables": {
+        "validezPresupuesto": 7,
+        "numeroPresupuesto": "SA-4444",
+        "fechaPresupuesto": "2022-12-22",
+        "descuentoTotal": "10",
+        "tipoDescuento": "profesional"
+      }
+    },
+    {
+      "estado": "terminado",
+      "id": 2042,
+      "cliente": {
+        "nombreCliente": "osvaldo",
+        "contactoCliente": "111111",
+        "direccionCliente": "la casa de osvaldo",
+        "nombrePedido": "Osvalod",
+        "descripcionPedido": "la descripciooon es essta"
+      },
+      "empresa": {
+        "nombreEmpresa": "SG company",
+        "direccionEmpresa": "zapiola 1212",
+        "contactoEmpresa": "29492492",
+        "observacionesParticulares": "observaciones en particular de SG",
+        "aclaracionesGenerales": "plazo segun estipulado"
+      },
+      "productosList": [
+        {
+          "cantidad": "",
+          "costoUnitario": "",
+          "descripcion": "",
+          "nombreMaterial": "",
+          "coeficienteVenta": 1.5
+        }
+      ],
+      "variables": {
+        "validezPresupuesto": "7",
+        "numeroPresupuesto": "SG-1111",
+        "fechaPresupuesto": "2022-10-10",
+        "descuentoTotal": 10,
+        "tipoDescuento": "profesional"
+      }
+    }
+  ]
+}

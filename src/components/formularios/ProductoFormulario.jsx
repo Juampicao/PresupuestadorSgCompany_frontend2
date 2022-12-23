@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Error from "../../atoms/Error";
+import CustomLogger from "../../helpers/CustomLogger";
 import useGeneral from "../../hooks/useGeneral";
-const ProductoFormulario = () => {
+
+const customLogger = new CustomLogger();
+
+const ProductoFormulario = ({ arrayProductList = "" }) => {
   const { productosList, setProductosList, error, setError, validarForm } =
     useGeneral();
 
@@ -46,6 +50,35 @@ const ProductoFormulario = () => {
     setProductosList([...productosList, { nombreMaterial: "" }]);
   };
 
+  /**
+   * Completar campos para editar la lista de productos.
+   * @param {*} objeto
+   */
+  function completeFields(objeto) {
+    if (objeto.length > 1) {
+      customLogger.logDebug(
+        "[ProductoFormulario.jsx], Editando, arrayProductList:",
+        objeto
+      );
+      setProductosList(objeto);
+    } else {
+      customLogger.logDebug(
+        "[ProductoFormulario.jsx], Creando nuevo array, No hay arrayProductList"
+      );
+    }
+  }
+
+  useEffect(() => {
+    customLogger.logDebug(
+      `[ProductoFormulario.jsx], arrayProductList: Cantidad:${arrayProductList.length}, items: ${arrayProductList}`,
+      arrayProductList
+    );
+    completeFields(arrayProductList);
+  }, []);
+
+  // Select
+  const opcionesNumerosVenta = ["--select--", 1, 1.5, 2, 2.3, 2.5, 3, "otro"];
+
   return (
     <>
       {productosList.map((product, index) => (
@@ -53,41 +86,6 @@ const ProductoFormulario = () => {
           <div className="form-field">
             <div>
               <h3 className="titulos"> {index + 1}° Producto</h3>
-
-              {/*  ------ Producto Formulario Precio Venta Manual -------*/}
-              {/* <div className="form_container_child flex">
-                {isChecked ? (
-                  <label htmlFor="" className="tooltip">
-                    Escribir Precio de Venta Manual
-                  </label>
-                ) : (
-                  <label htmlFor="" className="tooltip">
-                    Escribir Costo y sacar automatico el precio
-                  </label>
-                )}
-                <input
-                  type="checkbox"
-                  value="Price"
-                  checked={isChecked}
-                  onChange={handleOnChangeCheck}
-                />
-              </div> */}
-              {/* {isChecked ? (
-                <div className="form_container_child">
-                  <label> Precio Venta Unitario </label>
-                  <input
-                    type="number"
-                    placeholder="Agrega el precio venta del producto"
-                    name="precioUnitario"
-                    value={product.precioUnitario}
-                    onChange={(e) => handleProductoChange(e, index)}
-                    onBlur={() => validarForm(product.precioUnitario)}
-                  />
-                  {error ? <Error msg="Completa el precio unitario" /> : ""}
-                </div>
-              ) : (
-                ""
-              )} */}
 
               {/* -------- Producto Formulario Costo  ------- */}
               <div className="form_container_child ">
@@ -108,26 +106,23 @@ const ProductoFormulario = () => {
                     onChange={(e) => handleProductoChange(e, index)}
                     // onBlur={() => validarForm(product.coeficienteVenta)}
                   >
-                    <option> -- select-- </option>
-                    <option value="otro">Otro</option>
-                    <option> 1 </option>
-                    <option> 1.2 </option>
-                    <option>1.5</option>
-                    <option> 2 </option>
-                    <option> 2.5 </option>
-                    <option> 3</option>
-                    <option> 4</option>
+                    {opcionesNumerosVenta.map((opcion) => (
+                      <option value={opcion}>{opcion}</option>
+                    ))}
                   </select>
 
-                  {product.coeficienteVenta === "otro" ? (
+                  {/* //Todo HACER EL "OTRO" */}
+                  {/* {product.coeficienteVenta === "otro" ? (
                     <input
                       type="number"
                       placeholder="escriba el nuevo % multiplicado de ventas"
                       className="form_container_child"
+                      name="coeficienteVenta"
+                      onChange={(e) => handleProductoChange(e, index)}
                     ></input>
                   ) : (
                     ""
-                  )}
+                  )} */}
                 </div>
 
                 {/* //TODO => Vincular.. */}

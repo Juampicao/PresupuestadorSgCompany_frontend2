@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import Spiner from "../../atoms/spiner/Spiner";
+import CustomLogger from "../../helpers/CustomLogger";
 import useGeneral from "../../hooks/useGeneral";
 
-const EmpresaFormulario = () => {
+const customLogger = new CustomLogger();
+
+const EmpresaFormulario = ({ objetoEmpresa = "" }) => {
   const { setEmpresa, isCargando } = useGeneral();
 
   const [loading, setLoading] = useState(false);
@@ -100,6 +103,11 @@ const EmpresaFormulario = () => {
     console.log("las empresas cargadas son:", empresas);
   }, []);
 
+  useEffect(() => {
+    completeFields(objetoEmpresa);
+    customLogger.logDebug("[EmpresaFormulario], objetoEmpresa:", objetoEmpresa);
+  }, []);
+
   return (
     <>
       {/* <input
@@ -114,30 +122,31 @@ const EmpresaFormulario = () => {
       ) : (
         <div className="form_container">
           <h3 className="titulos">Empresa Vendedora</h3>
+          <p className="font-black">
+            Seleccionar 2 veces seguidas ver el autocompletado
+          </p>
+
+          {empresas.length >= 1 ? (
+            <select
+              className="selectstyles"
+              name=""
+              id=""
+              value={nombreEmpresa}
+              onChange={(e) => onSelectChange(e.target.value)}
+            >
+              <option value="">--select--</option>
+              {empresas.map((empresa) => (
+                <option value={empresa.id} key={empresa.id}>
+                  {empresa.nombreEmpresa}
+                </option>
+              ))}
+            </select>
+          ) : (
+            ""
+          )}
           <div className="form_container_child">
-            <p className="font-black">
-              Seleccionar 2 veces seguidas ver el autocompletado
-            </p>
             <label> Nombre </label>
             {/* {JSON.stringify(empresaSeleccionada, null, 2)} */}
-
-            {empresas.length >= 1 ? (
-              <select
-                name=""
-                id=""
-                value={nombreEmpresa}
-                onChange={(e) => onSelectChange(e.target.value)}
-              >
-                <option value="">--select--</option>
-                {empresas.map((empresa) => (
-                  <option value={empresa.id} key={empresa.id}>
-                    {empresa.nombreEmpresa}
-                  </option>
-                ))}
-              </select>
-            ) : (
-              ""
-            )}
 
             <input
               type="text"

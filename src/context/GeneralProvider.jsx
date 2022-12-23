@@ -1,6 +1,9 @@
 import axios from "axios";
 import { saveAs } from "file-saver";
 import React, { createContext, useEffect, useState } from "react";
+import CustomLogger from "../helpers/CustomLogger";
+
+const customLogger = new CustomLogger();
 
 const GeneralContext = createContext();
 
@@ -13,6 +16,8 @@ const GeneralProvider = ({ children }) => {
     nombreCliente: "",
     contactoCliente: "",
     direccionCliente: "",
+    nombrePedido: "",
+    descripcionPedido: "",
   });
 
   const [empresa, setEmpresa] = useState({
@@ -67,16 +72,28 @@ const GeneralProvider = ({ children }) => {
   }, [cliente, empresa, productosList, variables]);
 
   /**
+   * Crear un nuevo Pedido.
+   * @param {object} pedido
+   */
+  async function createNewPedidoFn(pedido) {
+    customLogger.logDebug("[createNewPedidoFn]:", pedido);
+    axios
+      .post(`http://localhost:4000/pedidos`, pedido)
+      .then((result) => customLogger.logInfo(`Creado con exito:`, result))
+      .catch((error) => customLogger.logError("Hubo un error:", error));
+  }
+
+  /**
    * Definir un nombre personalizado del pdf.
    * @returns string.pdf
    */
   function nombrePdfPersonalizado() {
-    return `Presupuesto${variables.numeroPresupuesto}-${cliente.nombreCliente}-${empresa.nombreEmpresa} .pdf`;
+    return `${variables.numeroPresupuesto}-${cliente.nombrePedido}.pdf`;
   }
 
   //*Conexión con backend para imprimir el pdf
   async function handleCreateAndDownloadPdf() {
-    // const handleCreateAndDownloadPdf = async () => {
+    createNewPedidoFn(presupuestoFinal);
     setTimeout(() => {
       console.log(
         "generalProvider, createAndDownloadPdf => El presupuesto final=",

@@ -5,8 +5,8 @@
       "nombreEmpresa": "SG Company",
       "direccionEmpresa": "Zapiola 2022",
       "contactoEmpresa": "1122334455",
-      "observacionesParticulares": "observaciones de la empresa sg",
-      "aclaracionesGenerales": ""
+      "observacionesParticulares": "Formas y condiciones de contratación: Precios indicados no incluyen IVA .Valores expresados en dólares EE.UU. Tipo  de cambio : vendedor -Bco Nación. Forma de pago:70% acopio y saldo contra entrega.",
+      "aclaracionesGenerales": "Plazo de entrega : hasta 25 días  desde el replanteo."
     },
     {
       "id": 2,
@@ -37,38 +37,117 @@
     },
     {
       "nombreCliente": "Herrajes SRL",
-      "contactoCliente": "111111111",
+      "contactoCliente": "222222",
       "direccionCliente": "Congreso 3002 5A",
       "correoElectronico": "herrajesSRL@gmail",
       "pedidoCliente": "50 metros de granito termolado ahre",
-      "fechaUltimaModificacion": "2022-12-16T22:05:52.787Z",
+      "fechaUltimaModificacion": "2022-12-20T18:16:55.643Z",
       "id": 102
+    },
+    {
+      "nombreCliente": "mauro",
+      "contactoCliente": "1134091100",
+      "direccionCliente": "zapiola 2156",
+      "correoElectronico": "santymauro.sg@gmail.com",
+      "pedidoCliente": "-",
+      "fechaUltimaModificacion": "2022-12-20T22:16:06.642Z",
+      "id": 103
     }
   ],
   "pedidos": [
     {
       "descripcionPedido": "50 metros de granito termolado ahre",
+      "nombrePedido": "Pedido-Burbon",
       "nombreCliente": "Burbon SA",
-      "fecha": "2022-12-16",
-      "id": 2032
+      "fecha": "1999-23-10",
+      "estado": "terminado",
+      "numeroCotizacion": "SA-3333-Pedido-Burbon",
+      "id": 2032,
+      "variables": {
+        "validezPresupuesto": "7",
+        "numeroCotizacion": "SA-3333-Pedido-Burbon",
+        "fechaPresupuesto": "1999-23-10",
+        "descuentoTotal": 10,
+        "tipoDescuento": "profesional"
+      },
+      "cliente": {
+        "nombreCliente": "Burbon SA",
+        "contactoCliente": "333124124124",
+        "direccionCliente": "Ciudad de la paz 1202 3b",
+        "nombrePedido": "Pedido-Burbon",
+        "descripcionPedido": "la descripciooon es Pedido-Burbon"
+      },
+      "empresa": {
+        "nombreEmpresa": "SG company",
+        "direccionEmpresa": "zapiola 1212",
+        "contactoEmpresa": "29492492",
+        "observacionesParticulares": "observaciones en particular de SG",
+        "aclaracionesGenerales": "plazo segun estipulado"
+      },
+      "productosList": [
+        {
+          "cantidad": 4,
+          "costoUnitario": 2,
+          "descripcion": "CACA por doquier",
+          "nombreMaterial": "madera",
+          "coeficienteVenta": 1.5
+        },
+        {
+          "cantidad": 17,
+          "costoUnitario": 4,
+          "descripcion": "POPO por doquier",
+          "nombreMaterial": "quarzo",
+          "coeficienteVenta": 1.5
+        }
+      ]
     },
+
     {
-      "descripcionPedido": "10 metros de travertino por 5x3cm",
-      "nombreCliente": "102",
-      "fecha": "2022-12-20T02:21:15.082Z",
-      "id": 2033
-    },
-    {
-      "descripcionPedido": "Nuevo pedido para presuestar",
-      "nombreCliente": "102",
-      "fecha": "2022-12-20T02:44:39.454Z",
-      "id": 2034
-    },
-    {
-      "descripcionPedido": "pedido de burbon",
-      "nombreCliente": "101",
-      "fecha": "2022-12-20T02:50:52.400Z",
-      "id": 2035
+      "descripcionPedido": "50 metros de granito termolado ahre",
+      "nombrePedido": "ESTE FUNCIONA",
+      "nombreCliente": "Herrajes SRL",
+      "fecha": "2000-10-05",
+      "estado": "terminado",
+      "numeroCotizacion": "SA-3333-Pedido-Herrajes",
+      "id": 877,
+      "cliente": {
+        "nombreCliente": "Herrajes SRL",
+        "contactoCliente": "222222",
+        "direccionCliente": "Congreso 3002 5A",
+        "nombrePedido": "Pedido-Herrajes",
+        "descripcionPedido": "la descripciooon es Pedido-Herrajes"
+      },
+      "empresa": {
+        "nombreEmpresa": "SG Company",
+        "direccionEmpresa": "Zapiola 2022",
+        "contactoEmpresa": "1122334455",
+        "observacionesParticulares": "Formas y condiciones de contratación: Precios indicados no incluyen IVA .Valores expresados en dólares EE.UU. Tipo  de cambio : vendedor -Bco Nación. Forma de pago:70% acopio y saldo contra entrega.",
+        "aclaracionesGenerales": "Plazo de entrega : hasta 25 días  desde el replanteo."
+      },
+      "productosList": [
+        {
+          "cantidad": 10,
+          "costoUnitario": 5,
+          "descripcion": "maderas por doquier",
+          "nombreMaterial": "madera",
+          "coeficienteVenta": 1.5
+        },
+        {
+          "cantidad": 30,
+          "costoUnitario": 30,
+          "descripcion": "quarzo por doquier",
+          "nombreMaterial": "quarzo",
+          "coeficienteVenta": 1.5
+        }
+      ],
+      "variables": {
+        "numeroCotizacion": "SA-3333-Pedido-Herrajes",
+        "validezPresupuesto": 7,
+        "numeroPresupuesto": "SA-4444",
+        "fechaPresupuesto": "2022-12-22",
+        "descuentoTotal": "10",
+        "tipoDescuento": "profesional"
+      }
     }
   ]
 }

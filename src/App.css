@@ -28,6 +28,9 @@ body {
     @apply block w-full p-2 px-4 bg-gray-100 rounded-md mt-1 
   }
   
+  .selectstyles{
+    @apply block px-4 p-2 ml-3  border border-black rounded-md capitalize
+  }
   textarea{
     @apply rounded-md
   }
