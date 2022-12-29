@@ -9,7 +9,10 @@ const GeneralContext = createContext();
 
 const GeneralProvider = ({ children }) => {
   const [isCargando, setIsCargando] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState({
+    status: false,
+    msg: "",
+  });
   const [presupuestoFinal, setPresupuestoFinal] = useState({});
 
   const [cliente, setCliente] = useState({
@@ -31,6 +34,8 @@ const GeneralProvider = ({ children }) => {
     numeroPresupuesto: "",
     fechaPresupuesto: "",
     validezPresupuesto: "",
+    descuentoTotal: "",
+    tipoDescuento: "",
   });
   const [productosList, setProductosList] = useState([
     {
@@ -39,13 +44,14 @@ const GeneralProvider = ({ children }) => {
       descripcion: "",
       nombreMaterial: "",
       coeficienteVenta: "",
+      monedaCotizar: "dolar",
     },
   ]);
 
   //* Desaparecer error a los 5 segundos.
-  if (error) {
+  if (error.status) {
     setTimeout(() => {
-      setError(false);
+      setError({ status: false });
     }, 5000);
   }
 
@@ -56,7 +62,7 @@ const GeneralProvider = ({ children }) => {
    */
   function validarForm(variable) {
     if ([variable].includes("")) {
-      setError(true);
+      setError({ status: true });
       return;
     }
   }
@@ -78,7 +84,7 @@ const GeneralProvider = ({ children }) => {
   async function createNewPedidoFn(pedido) {
     customLogger.logDebug("[createNewPedidoFn]:", pedido);
     axios
-      .post(`http://localhost:4000/pedidos`, pedido)
+      .post(`http://localhost:5000/presupuestos`, pedido)
       .then((result) => customLogger.logInfo(`Creado con exito:`, result))
       .catch((error) => customLogger.logError("Hubo un error:", error));
   }
@@ -92,25 +98,37 @@ const GeneralProvider = ({ children }) => {
   }
 
   //*Conexión con backend para imprimir el pdf
+  //* Solo imprime y trae. Por ahora no guarda. "/create" para guardar. "/print" para solo traer.
   async function handleCreateAndDownloadPdf() {
-    createNewPedidoFn(presupuestoFinal);
     setTimeout(() => {
       console.log(
-        "generalProvider, createAndDownloadPdf => El presupuesto final=",
+        "[createAndDownloadPdf] => El presupuesto final=",
         presupuestoFinal
       );
       axios
-        .post(`${import.meta.env.VITE_API_URL}/create-pdf`, presupuestoFinal)
-        .then(() =>
-          axios.get(`${import.meta.env.VITE_API_URL}/fetch-pdf`, {
-            responseType: "blob",
-          })
+        .post(
+          `${import.meta.env.VITE_API_URL}/presupuestos/print`,
+          presupuestoFinal
+        ) // Solo Imprime el pdf, no lo guarda.
+        // .post(
+        //   `${import.meta.env.VITE_API_URL}/presupuestos/create`,
+        //   presupuestoFinal
+        // ) // Solo Guarda el presupuesto en la base.
+        .then(
+          () =>
+            axios.get(`${import.meta.env.VITE_API_URL}/pdf/fetch`, {
+              responseType: "blob",
+            }) // Desde pdf Controlelr ok
         )
         .then((res) => {
           const pdfBlob = new Blob([res.data], { type: "application/pdf" });
           saveAs(pdfBlob, nombrePdfPersonalizado());
-          setIsCargando(false);
-        });
+        })
+        .catch((error) => {
+          customLogger.logDebug("[handleCreateAndDownloadPdfFN", error.msg);
+          setError({ status: true, msg: error });
+        })
+        .finally(() => setIsCargando(false));
     }, 2000);
   }
 

@@ -2,12 +2,15 @@ import axios from "axios";
 import React, { createContext, useState } from "react";
 import ErrorPedidos from "../errores/ErrorPedidos";
 import CustomLogger from "../helpers/CustomLogger";
+
 const PedidosContext = createContext();
 
 let customLogger = new CustomLogger();
 
 const PedidosProvider = ({ children }) => {
+  // const {data : pedidos, isLoading, error} = useAxios();
   const url = `${import.meta.env.VITE_DATABASE_URL}/pedidos`;
+  // const url = `${import.meta.env.VITE_DATABASE_URL}/presupuestos`;
 
   const [loading, setLoading] = useState(false);
   const [pedidos, setPedidos] = useState([]);
@@ -55,7 +58,7 @@ const PedidosProvider = ({ children }) => {
       .then((res) => {
         customLogger.logDebug(
           "[getAllPedidosFn()], Los pedidos son:",
-          JSON.stringify(res.data, null, 4)
+          res.data
         );
         setPedidos(res.data);
         setLoading(false);
@@ -76,10 +79,8 @@ const PedidosProvider = ({ children }) => {
     axios
       .get(`${url}/${id}`)
       .then((res) => {
-        customLogger.logDebug(
-          "[getPedidoByIdFn()]:" + JSON.stringify(res.data, null, 4)
-        );
-        setPedido(res.data);
+        customLogger.logDebug("[getPedidoByIdFn]:" + res.data.data);
+        setPedido(res.data.data);
         setLoading(false);
       })
       .catch((error) => {

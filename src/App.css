@@ -10,6 +10,7 @@ body {
 @tailwind components;
 @tailwind utilities;
 
+  
 @layer base {
   h2 {
     @apply text-center 
@@ -38,11 +39,12 @@ body {
     @apply ml-2 mr-2 pl-2 py-1  min-w-[20px] max-w-[120px] capitalize border border-slate-300;
   }
 
+    
 }
 
 @layer components {
 
-  
+
 }
 
 @layer utilities {
@@ -71,6 +73,7 @@ body {
   .img-icon{
     @apply h-6
   }
+
   
 }
 
@@ -85,3 +88,4 @@ input {
   border-color: rgb(31, 31, 43);
   border-width: 1px;
 }
+

@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ContenedorFormularios from "../ContendorFormularios";
-import ClienteFormulario from "../formularios/ClienteFormulario";
 import EmpresaFormulario from "../formularios/EmpresaFormulario";
 import ProductoFormulario from "../formularios/ProductoFormulario";
 
 import Spiner from "../../atoms/spiner/Spiner";
 import CustomLogger from "../../helpers/CustomLogger";
 import useGeneral from "../../hooks/useGeneral";
+import ClienteFormulario from "../formularios/ClienteFormulario";
 import VariablesFormulario from "../formularios/VariablesFormulario";
 const customLogger = new CustomLogger();
 
@@ -14,33 +14,13 @@ const FormularioFinal = ({ pedido = "" }) => {
   const { handleCreateAndDownloadPdf, isCargando, setIsCargando } =
     useGeneral();
 
+  const { variables, cliente, empresa, productosList } = pedido;
+
+  //* HandleSubmit
   const handleSubmit = async () => {
     setIsCargando(true);
     handleCreateAndDownloadPdf();
   };
-
-  const { variables, cliente, empresa, productosList } = pedido;
-
-  //TODO Error en productosList, no reconoce como array. Es un objeto.
-  useEffect(() => {
-    customLogger.logDebug(
-      `[EditarProductoFormulario.jsx], cantidad: ${productosList}, arrayPoductsList: ${productosList} `,
-      productosList
-    );
-    validateObjectEmpty(productosList);
-  }, []);
-
-  /**
-   * Si el array por props esta vacio lanzará un error. El componente EDITA.
-   * @param {*} array
-   */
-  function validateObjectEmpty(array) {
-    if (!array) {
-      customLogger.logError(
-        "[EditarProductoFormulario.jsx], estas editando pero arrayPoductsList esta vacio."
-      );
-    }
-  }
 
   return (
     <div>

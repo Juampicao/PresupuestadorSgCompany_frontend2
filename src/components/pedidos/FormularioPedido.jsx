@@ -10,9 +10,7 @@ import {
 import useClientes from "../../hooks/useClientes";
 
 // Image
-import clienteImage from "../../img/newIcons/cliente.png";
-import pedidoImage from "../../img/newIcons/construccion.png";
-import notasImage from "../../img/newIcons/notas.png";
+import { ICONS } from "../../helpers/images";
 
 let customLogger = new CustomLogger();
 
@@ -82,7 +80,7 @@ const FormularioPedido = ({ pedido, loading, editFn, createFn }) => {
           </h3>
           {/* Cliente */}
           <div className="form_container_child">
-            <FormContainerChild img={clienteImage} title="Cliente" />
+            <FormContainerChild img={ICONS.clienteImage} title="Cliente" />
 
             {/* <DataListReutilizable
               dataList={clientes}
@@ -123,7 +121,10 @@ const FormularioPedido = ({ pedido, loading, editFn, createFn }) => {
 
           {/* Nombre Pedido */}
           <div className="form_container_child">
-            <FormContainerChild img={pedidoImage} title="Nombre del pedido" />
+            <FormContainerChild
+              img={ICONS.pedidosImage}
+              title="Nombre del pedido"
+            />
             <input
               type="text"
               id="nombrePedido"
@@ -137,7 +138,7 @@ const FormularioPedido = ({ pedido, loading, editFn, createFn }) => {
 
           <div className="form_container_child">
             <FormContainerChild
-              img={clienteImage}
+              img={ICONS.clienteImage}
               title="Numero Cotizacion del pedido"
             />
             <input
@@ -153,7 +154,7 @@ const FormularioPedido = ({ pedido, loading, editFn, createFn }) => {
           {/* Descripcion */}
           <div className="form_container_child">
             <FormContainerChild
-              img={notasImage}
+              img={ICONS.notasImage}
               title="Descripcion del pedido"
             />
             <textarea

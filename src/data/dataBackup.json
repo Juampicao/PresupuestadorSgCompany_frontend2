@@ -1,65 +1,127 @@
 {
+  "empresas": [
+    {
+      "id": 1,
+      "nombreEmpresa": "SG Company",
+      "direccionEmpresa": "Zapiola 2022",
+      "contactoEmpresa": "1122334455",
+      "observacionesParticulares": "Formas y condiciones de contratación: Precios indicados no incluyen IVA .Valores expresados en dólares EE.UU. Tipo  de cambio : vendedor -Bco Nación. Forma de pago:70% acopio y saldo contra entrega.",
+      "aclaracionesGenerales": "Plazo de entrega : hasta 25 días  desde el replanteo."
+    },
+    {
+      "id": 2,
+      "nombreEmpresa": "Campito Futsal",
+      "direccionEmpresa": "nuñez 2629",
+      "contactoEmpresa": "112412421412",
+      "observacionesParticulares": "observaciones de la empresa el campito",
+      "aclaracionesGenerales": ""
+    },
+    {
+      "id": 3,
+      "nombreEmpresa": "Mesta SA",
+      "direccionEmpresa": "Cabildo 2620 6f",
+      "contactoEmpresa": "333124124124",
+      "observacionesParticulares": "observaciones de la empresa Mesta SA",
+      "aclaracionesGenerales": ""
+    }
+  ],
+  "clientes": [
+    {
+      "nombreCliente": "Burbon SA",
+      "contactoCliente": "333124124124",
+      "direccionCliente": "Ciudad de la paz 1202 3b",
+      "correoElectronico": "BurbonSA@gmail.com",
+      "nombrePedido": "Pedido-Burbon",
+      "descripcionPedido": "la descripciooon es Pedido-Burbon",
+      "pedidoCliente": "10 metros de travertino por 5x3cm",
+      "fechaUltimaModificacion": "2022-12-19T16:20:32.122Z",
+      "id": 101
+    },
+    {
+      "nombreCliente": "Herrajes SRL",
+      "contactoCliente": "222222",
+      "direccionCliente": "Congreso 3002 5A",
+      "correoElectronico": "herrajesSRL@gmail",
+      "pedidoCliente": "50 metros de granito termolado ahre",
+      "nombrePedido": "Pedido-Herrajes-SRL",
+      "descripcionPedido": "la descripciooon es Pedido-Herrajes",
+      "fechaUltimaModificacion": "2022-12-20T18:16:55.643Z",
+      "id": 102
+    },
+    {
+      "nombreCliente": "SANTIAGO SA",
+      "contactoCliente": "1134091100",
+      "direccionCliente": "zapiola 2156",
+      "correoElectronico": "santymauro.sg@gmail.com",
+      "pedidoCliente": "-",
+      "nombrePedido": "Pedido-SANTIAGO SA",
+      "descripcionPedido": "la descripciooon es SANTIAGO SA",
+      "fechaUltimaModificacion": "2022-12-20T22:16:06.642Z",
+      "id": 103
+    }
+  ],
   "pedidos": [
     {
       "descripcionPedido": "50 metros de granito termolado ahre",
-      "nombrePedido": "Alicia Cocina",
+      "nombrePedido": "Pedido-Burbon",
       "nombreCliente": "Burbon SA",
-      "fecha": "2022-12-16",
+      "fecha": "1999-23-10",
       "estado": "terminado",
-      "numeroCotizacion": "SA-3333-alicia cocina",
+      "numeroCotizacion": "SA-3333-Pedido-Burbon",
       "id": 2032,
       "variables": {
-        "validezPresupuesto": "7",
-        "numeroCotizacion": "SG-1111",
-        "fechaPresupuesto": "2022-10-10",
+        "validezPresupuesto": 20,
+        "numeroCotizacion": "SA-3333-Pedido-Burbon",
+        "fechaPresupuesto": "1999-23-10",
         "descuentoTotal": 10,
         "tipoDescuento": "profesional"
       },
       "cliente": {
-        "nombreCliente": "osvaldo",
-        "contactoCliente": "111111",
-        "direccionCliente": "la casa de osvaldo",
-        "nombrePedido": "Osvalod",
-        "descripcionPedido": "la descripciooon es essta"
+        "nombreCliente": "Burbon SA",
+        "contactoCliente": "333124124124",
+        "direccionCliente": "Ciudad de la paz 1202 3b",
+        "nombrePedido": "Pedido-Burbon",
+        "descripcionPedido": "la descripciooon es Pedido-Burbon"
       },
       "empresa": {
-        "nombreEmpresa": "SG company",
-        "direccionEmpresa": "zapiola 1212",
-        "contactoEmpresa": "29492492",
-        "observacionesParticulares": "observaciones en particular de SG",
-        "aclaracionesGenerales": "plazo segun estipulado"
+        "id": 2,
+        "nombreEmpresa": "Campito Futsal",
+        "direccionEmpresa": "nuñez 2629",
+        "contactoEmpresa": "112412421412",
+        "observacionesParticulares": "observaciones de la empresa el campito",
+        "aclaracionesGenerales": "no hay acalaracions"
       },
       "productosList": [
         {
-          "cantidad": "Madera",
-          "costoUnitario": "",
-          "descripcion": "",
-          "nombreMaterial": "",
+          "cantidad": 4,
+          "costoUnitario": 2,
+          "descripcion": "CACA por doquier",
+          "nombreMaterial": "madera",
+          "coeficienteVenta": 1.5
+        },
+        {
+          "cantidad": 17,
+          "costoUnitario": 4,
+          "descripcion": "POPO por doquier",
+          "nombreMaterial": "quarzo",
           "coeficienteVenta": 1.5
         }
       ]
     },
     {
-      "descripcionPedido": "3x5 del granito",
-      "nombrePedido": "Osvaldo NO ANDA",
-      "nombreCliente": "Burbon SA",
-      "fecha": "2022-12-21T13:07:29.703Z",
-      "estado": "terminado",
-      "numeroCotizacion": "SA-3334-Osvaldo Granito",
-      "id": 2038
-    },
-    {
       "descripcionPedido": "50 metros de granito termolado ahre",
       "nombrePedido": "ESTE FUNCIONA",
-      "nombreCliente": "Burbon SA",
-      "fecha": "2022-12-16",
+      "nombreCliente": "Herrajes SRL",
+      "fecha": "2000-10-05",
       "estado": "terminado",
-      "numeroCotizacion": "SA-3333-alicia cocina",
-      "id": 2033,
+      "numeroCotizacion": "SA-3333-Pedido-Herrajes",
+      "id": 877,
       "cliente": {
         "nombreCliente": "Herrajes SRL",
         "contactoCliente": "222222",
-        "direccionCliente": "Congreso 3002 5A"
+        "direccionCliente": "Congreso 3002 5A",
+        "nombrePedido": "Pedido-Herrajes",
+        "descripcionPedido": "AAA"
       },
       "empresa": {
         "nombreEmpresa": "SG Company",
@@ -85,7 +147,8 @@
         }
       ],
       "variables": {
-        "validezPresupuesto": 7,
+        "numeroCotizacion": "SA-3333-Pedido-Herrajes",
+        "validezPresupuesto": 15,
         "numeroPresupuesto": "SA-4444",
         "fechaPresupuesto": "2022-12-22",
         "descuentoTotal": "10",
@@ -93,38 +156,14 @@
       }
     },
     {
-      "estado": "terminado",
-      "id": 2042,
-      "cliente": {
-        "nombreCliente": "osvaldo",
-        "contactoCliente": "111111",
-        "direccionCliente": "la casa de osvaldo",
-        "nombrePedido": "Osvalod",
-        "descripcionPedido": "la descripciooon es essta"
-      },
-      "empresa": {
-        "nombreEmpresa": "SG company",
-        "direccionEmpresa": "zapiola 1212",
-        "contactoEmpresa": "29492492",
-        "observacionesParticulares": "observaciones en particular de SG",
-        "aclaracionesGenerales": "plazo segun estipulado"
-      },
-      "productosList": [
-        {
-          "cantidad": "",
-          "costoUnitario": "",
-          "descripcion": "",
-          "nombreMaterial": "",
-          "coeficienteVenta": 1.5
-        }
-      ],
-      "variables": {
-        "validezPresupuesto": "7",
-        "numeroPresupuesto": "SG-1111",
-        "fechaPresupuesto": "2022-10-10",
-        "descuentoTotal": 10,
-        "tipoDescuento": "profesional"
-      }
+      "descripcionPedido": "a",
+      "nombrePedido": "Prueba",
+      "nombreCliente": "Burbon SA",
+      "fecha": "2022-12-23T03:48:54.557Z",
+      "estado": "pendiente",
+      "numeroCotizacion": "",
+      "id": 2033
     }
-  ]
+  ],
+  "pruebas": []
 }

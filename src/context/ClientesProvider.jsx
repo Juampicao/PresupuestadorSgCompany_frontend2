@@ -51,7 +51,7 @@ const ClientesProvider = ({ children }) => {
   /**
    * Obtener todos los clientes
    */
-  function getAllClientesFn() {
+  async function getAllClientesFn() {
     customLogger.logInfo("[getAllClientesFn]");
 
     setLoading(true);
@@ -60,7 +60,7 @@ const ClientesProvider = ({ children }) => {
       .then((res) => {
         customLogger.logDebug(
           "[getAllClientes()], Los clientes son:",
-          JSON.stringify(res.data, null, 4)
+          res.data
         );
         setClientes(res.data);
         setLoading(false);
@@ -80,9 +80,7 @@ const ClientesProvider = ({ children }) => {
     axios
       .get(`http://localhost:4000/clientes/${id}`)
       .then((res) => {
-        customLogger.logDebug(
-          "[getClientByIdFn():]" + JSON.stringify(res.data, null, 4)
-        );
+        customLogger.logDebug("[getClientByIdFn():]" + res.data);
         setCliente(res.data);
         setLoading(false);
       })

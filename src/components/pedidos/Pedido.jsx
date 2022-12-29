@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { BotonEditar, BotonEliminar, BotonVer } from "../../atoms/Botones";
 import Modal from "../../atoms/Modal";
 import CustomLogger from "../../helpers/CustomLogger";
-import { estadoPedidosObject } from "../../helpers/estadoPedidos";
 import useModal from "../../hooks/useModal";
 import FormularioPedido from "./FormularioPedido";
 
@@ -35,17 +34,17 @@ const Pedido = ({ pedido, deleteFn, loading, createFn, editFn }) => {
     }
   }
   useEffect(() => {
-    customLogger.logDebug("el pedido es:" + JSON.stringify(pedido, null, 2));
+    // customLogger.logDebug("el pedido es:" + JSON.stringify(pedido, null, 2));
   }, []);
 
   return (
     <>
       <tr
-        className={`${estadoPedidosObject[estado].color} border border-1 border-slate-400`}
+      // className={`${estadoPedidosObject[estado].color} border border-1 border-slate-400`}
       >
         <td className="">
           <img
-            src={estadoPedidosObject[estado].img}
+            // src={estadoPedidosObject[estado].img}
             alt=""
             className="img-icon mx-auto"
           />

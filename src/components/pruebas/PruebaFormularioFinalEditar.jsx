@@ -2,9 +2,6 @@ import React from "react";
 import Header from "../../atoms/Header";
 import FormularioFinal from "../presupuestos/FormularioFinal";
 // import ClienteFormulario from "../formularios/ClienteFormulario";
-// import EmpresaFormulario from "../formularios/EmpresaFormulario";
-// import ProductoFormulario from "../formularios/ProductoFormulario";
-// import VariablesFormulario from "../formularios/VariablesFormulario";
 
 const objetoPedido = {
   descripcionPedido: "3x5 del granito",
@@ -128,9 +125,10 @@ const PruebaFormularioFinalEditar = () => {
       <ClienteFormulario objetoCliente={objetoCliente} />
       <EmpresaFormulario objetoEmpresa={objetoEmpresa} />
       <ProductoFormulario arrayProductList={arrayPoductsList} /> */}
-
-      <Header title={"FORM FINAL"} />
-      <FormularioFinal pedido={pedido} />
+      // <button onClick={() => GetAllPresupuestos()}></button>
+      // {/* <PruebaSelect /> */}
+      // <Header title={"FORM FINAL"} />
+      // <FormularioFinal pedido={pedido} />
     </>
   );
 };

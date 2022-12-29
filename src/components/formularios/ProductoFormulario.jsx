@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import Checkbox from "../../atoms/checkbox/Checkbox";
 import Error from "../../atoms/Error";
 import CustomLogger from "../../helpers/CustomLogger";
+import useCheck from "../../hooks/useCheck";
 import useGeneral from "../../hooks/useGeneral";
 
 const customLogger = new CustomLogger();
@@ -9,16 +11,7 @@ const ProductoFormulario = ({ arrayProductList = "" }) => {
   const { productosList, setProductosList, error, setError, validarForm } =
     useGeneral();
 
-  // Todo => Vincular con el generalProvider y backend.
-  const [moneda, setMoneda] = useState("U$D");
-  const [isChecked, setIsChecked] = useState(false);
-
-  /**
-   * Pruebas checkbox moneda
-   */
-  const handleOnChangeCheck = () => {
-    setIsChecked(!isChecked);
-  };
+  const { isChecked, changeChecked } = useCheck();
 
   /**
    * Cambiar atributos de un producto.
@@ -30,7 +23,7 @@ const ProductoFormulario = ({ arrayProductList = "" }) => {
     const list = [...productosList];
     list[index][name] = value;
     setProductosList(list);
-    console.log(productosList);
+    // console.log(productosList);
   };
 
   /**
@@ -77,8 +70,13 @@ const ProductoFormulario = ({ arrayProductList = "" }) => {
   }, []);
 
   // Select
-  const opcionesNumerosVenta = ["--select--", 1, 1.5, 2, 2.3, 2.5, 3, "otro"];
+  const opcionesNumerosVenta = ["--select--", 1, 1.5, 2, 2.3, 2.5, 3];
 
+  // Select change
+  const handleIsCheckedOther = (e, index) => {
+    changeChecked();
+    handleProductoChange(e, index);
+  };
   return (
     <>
       {productosList.map((product, index) => (
@@ -89,56 +87,67 @@ const ProductoFormulario = ({ arrayProductList = "" }) => {
 
               {/* -------- Producto Formulario Costo  ------- */}
               <div className="form_container_child ">
-                <div>
-                  <label htmlFor="coeficienteVenta" className="tooltip">
-                    % Multiplicador de Venta
-                  </label>
-                  <select
-                    name="coeficienteVenta"
-                    id="coeficienteVenta"
-                    placeholder="$"
-                    className="block  p-2 px-10 bg-gray-100 rounded-md mt-1 text-start"
-                    value={
-                      product.coeficienteVenta
-                        ? product.coeficienteVenta
-                        : (product.coeficienteVenta = 1.5)
-                    }
-                    onChange={(e) => handleProductoChange(e, index)}
-                    // onBlur={() => validarForm(product.coeficienteVenta)}
-                  >
-                    {opcionesNumerosVenta.map((opcion) => (
-                      <option value={opcion}>{opcion}</option>
-                    ))}
-                  </select>
-
-                  {/* //Todo HACER EL "OTRO" */}
-                  {/* {product.coeficienteVenta === "otro" ? (
+                <label htmlFor="coeficienteVenta" className="tooltip">
+                  % Multiplicador de Venta
+                </label>
+                <div className="flex">
+                  {isChecked ? (
                     <input
                       type="number"
-                      placeholder="escriba el nuevo % multiplicado de ventas"
-                      className="form_container_child"
+                      placeholder="completa.."
                       name="coeficienteVenta"
+                      id="coeficienteVenta"
+                      className="inputSelect"
+                      value={product.coeficienteVenta}
                       onChange={(e) => handleProductoChange(e, index)}
-                    ></input>
+                    />
                   ) : (
-                    ""
-                  )} */}
+                    <select
+                      type="number"
+                      name="coeficienteVenta"
+                      id="coeficienteVenta"
+                      placeholder="$"
+                      className="inputSelect"
+                      value={
+                        product.coeficienteVenta
+                          ? product.coeficienteVenta
+                          : (product.coeficienteVenta = 1.5)
+                      }
+                      onChange={(e) => handleProductoChange(e, index)}
+                      // onBlur={() => validarForm(product.coeficienteVenta)}
+                    >
+                      {opcionesNumerosVenta.map((opcion) => (
+                        <option value={opcion}>{opcion}</option>
+                      ))}
+                    </select>
+                  )}
+
+                  {/* HandleIsCheckedOther */}
+                  <div className="flex items-center ">
+                    <Checkbox
+                      value2="Otro Valor"
+                      onChange={(e) => handleIsCheckedOther(e, index)}
+                      defaultChecked={
+                        arrayProductList?.coeficienteVenta ? true : false
+                      }
+                    />
+                  </div>
                 </div>
 
-                {/* //TODO => Vincular.. */}
                 {/* Moneda */}
                 <label htmlFor="coeficienteVenta" className="tooltip">
                   Moneda a cotizar
                 </label>
                 <select
-                  name=""
+                  name="monedaCotizar"
                   id=""
-                  className="block  p-2 px-10 bg-gray-100 rounded-md mt-1 text-start"
-                  value={moneda}
-                  onChange={(e) => setMoneda(e.target.value)}
+                  defaultValue={"dolar"}
+                  className="block  p-2 px-2 bg-gray-100 rounded-md mt-1 text-start"
+                  value={product.monedaCotizar}
+                  onChange={(e) => handleProductoChange(e, index)}
                 >
-                  <option value="Peso Argentino"> Pesos Argentinos </option>
-                  <option value="U$D"> U$D </option>
+                  <option value="peso"> Peso Argentino </option>
+                  <option value="dolar"> Dolar Americano U$D </option>
                 </select>
               </div>
               {/* Moneda */}
